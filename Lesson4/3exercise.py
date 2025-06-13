@@ -11,7 +11,7 @@ def calculate_average(numbers):
     return average
 
 data = [10, 20, 30, 40, 50]
-average = calculate_average(data)
+average = calculate_average(data) # error was here (passed data was empty [])
 print(f"The average is: {average}")
 
 # n (next): Execute the next line of code.
