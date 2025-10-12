@@ -14,3 +14,5 @@ def create_app():
     return app
 
 app = create_app()
+
+# Rodar com: uv run fastapi dev 1exercise.py
