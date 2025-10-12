@@ -1,0 +1,15 @@
+[
+  {"model": "store.category", "pk": 1, "fields": {"name": "Electronics"}},
+  {"model": "store.category", "pk": 2, "fields": {"name": "Books"}},
+  {"model": "store.category", "pk": 3, "fields": {"name": "Food"}},
+  {"model": "store.category", "pk": 4, "fields": {"name": "Tools"}},
+
+  {"model": "store.product", "pk": 1, "fields": {"name": "Laptop", "price": 3500.00, "category": 1}},
+  {"model": "store.product", "pk": 2, "fields": {"name": "Smartphone", "price": 2500.00, "category": 1}},
+  {"model": "store.product", "pk": 3, "fields": {"name": "Python for Beginners", "price": 89.90, "category": 2}},
+  {"model": "store.product", "pk": 4, "fields": {"name": "Fiction Novel", "price": 45.00, "category": 2}},
+  {"model": "store.product", "pk": 5, "fields": {"name": "Chocolate Bar", "price": 5.50, "category": 3}},
+  {"model": "store.product", "pk": 6, "fields": {"name": "Olive Oil", "price": 30.00, "category": 3}},
+  {"model": "store.product", "pk": 7, "fields": {"name": "Hammer", "price": 60.00, "category": 4}},
+  {"model": "store.product", "pk": 8, "fields": {"name": "Screwdriver", "price": 25.00, "category": 4}}
+]
