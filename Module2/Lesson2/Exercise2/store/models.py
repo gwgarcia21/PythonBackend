@@ -14,3 +14,10 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.category.name})"
+    
+class Warehouse(models.Model):
+    name = models.CharField(max_length=100)
+    products = models.ManyToManyField(Product, related_name="warehouses")
+
+    def __str__(self):
+        return self.name
