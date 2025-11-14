@@ -1,4 +1,6 @@
-""" 1. Modify the code to include roles (e.g., "admin", "user") in the JWT payload. """
+""" Modify the code to include roles (e.g., "admin", "user") in the JWT payload.
+Create a new endpoint that only administrators can access, using the role information in the JWT.
+Implement refresh tokens. Create a /refresh_token endpoint that exchanges a valid refresh token for a new access token and refresh token """
 
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer
@@ -45,3 +47,34 @@ def protected_route(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=401, detail="Token inválido ou expirado")
 
     return {"message": "Acesso permitido!", "user": payload["sub"], "role": payload["role"]}
+
+@app.get("/me")
+def protected_route(token: str = Depends(oauth2_scheme)):
+    payload = verify_token(token)
+
+    if payload is None:
+        raise HTTPException(status_code=401, detail="Token inválido ou expirado")
+
+    return {"message": "Acesso permitido!", "user": payload["sub"], "role": payload["role"]}
+
+@app.get("/admin")
+def admin_route(token: str = Depends(oauth2_scheme)):
+    payload = verify_token(token)
+
+    if payload is None:
+        raise HTTPException(status_code=401, detail="Token inválido ou expirado")
+
+    if payload["role"] != "admin":
+        raise HTTPException(status_code=403, detail="Acesso negado!")
+
+    return {"message": "Acesso permitido!", "user": payload["sub"], "role": payload["role"]}
+
+@app.get("/refresh_token")
+def refresh_token(token: str = Depends(oauth2_scheme)):
+    payload = verify_token(token)
+
+    if payload is None:
+        raise HTTPException(status_code=401, detail="Token inválido ou expirado")
+
+    token = create_access_token({"sub": payload["sub"], "role": payload["role"]})
+    return {"access_token": token, "token_type": "bearer"}
