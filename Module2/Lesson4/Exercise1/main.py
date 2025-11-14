@@ -1,3 +1,5 @@
+""" 1. Modify the code to include roles (e.g., "admin", "user") in the JWT payload. """
+
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
@@ -31,7 +33,7 @@ def login(data: UserLogin):
     if not authenticate_user(data.username, data.password):
         raise HTTPException(status_code=401, detail="Credenciais inválidas")
 
-    token = create_access_token({"sub": data.username})
+    token = create_access_token({"sub": data.username, "role": fake_user["role"]})
     return {"access_token": token, "token_type": "bearer"}
 
 
@@ -42,4 +44,4 @@ def protected_route(token: str = Depends(oauth2_scheme)):
     if payload is None:
         raise HTTPException(status_code=401, detail="Token inválido ou expirado")
 
-    return {"message": "Acesso permitido!", "user": payload["sub"]}
+    return {"message": "Acesso permitido!", "user": payload["sub"], "role": payload["role"]}

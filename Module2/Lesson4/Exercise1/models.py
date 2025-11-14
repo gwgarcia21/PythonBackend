@@ -5,7 +5,8 @@ from pydantic import BaseModel
 
 fake_user = {
     "username": "guilherme",
-    "password": "$argon2id$v=19$m=65536,t=3,p=4$qhUixPhfa41xjvHeG0MohQ$FKQ+l7QHNWswCPg0WSihV8x+9OJfwfXD81dUS9lx//I"  # senha: 1234
+    "password": "$argon2id$v=19$m=65536,t=3,p=4$qhUixPhfa41xjvHeG0MohQ$FKQ+l7QHNWswCPg0WSihV8x+9OJfwfXD81dUS9lx//I",  # senha: 1234
+    "role": "admin"
 }
 
 class UserLogin(BaseModel):
