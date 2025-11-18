@@ -1,8 +1,10 @@
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel, Field, EmailStr
 from typing import Optional
+from middlewares.security import SecurityMiddleware
 
 app = FastAPI()
+app.add_middleware(SecurityMiddleware)
 
 class Product(BaseModel):
     name: str = Field(..., min_length=3, max_length=20)
